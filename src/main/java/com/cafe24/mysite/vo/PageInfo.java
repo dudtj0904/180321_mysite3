@@ -1,15 +1,15 @@
 package com.cafe24.mysite.vo;
 
 public class PageInfo {
-	private Integer page; 	//현재 페이지
-	private String kwd;		//키워드
-	private int boardCount;			// 전체 게시글 수
-	private int pageBoardCount;		// 한 페이지 당 게시글 수
-	private int startPageNumber; 	// 페이지 시작 번호
-	private int endPageNumber;		// 페이지 끝 번호
-	private boolean previousBar;	// 이전 페이지로 가는 버튼
-	private boolean nextBar;		// 다음 페이지로 가는 버튼
-	private int totalPageCount;		// 전체 페이지 수
+	private Integer page; 	
+	private String kwd;		
+	private int boardCount;			
+	private int pageBoardCount;		
+	private int startPageNumber; 
+	private int endPageNumber;	
+	private boolean previousBar;	
+	private boolean nextBar;		
+	private int totalPageCount;		
 	
 	
 	public PageInfo() {
