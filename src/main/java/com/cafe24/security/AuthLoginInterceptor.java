@@ -27,11 +27,9 @@ public class AuthLoginInterceptor extends HandlerInterceptorAdapter {
 		vo.setEmail(email);
 		vo.setPassword(password);
 		
-		//컨테이너 받아오는 객체
 		ApplicationContext ac =  WebApplicationContextUtils.
 									getWebApplicationContext(request.getServletContext());
 		
-		// 타입을 주면 타입에 맞춰서 주고 email같은 문자열을 주면 object 리턴
 		UserService userService = ac.getBean(UserService.class); 
 		User authUser = userService.getUser(vo);
 		

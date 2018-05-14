@@ -10,7 +10,7 @@ import com.cafe24.mysite.vo.User;
 @Controller
 public class MainController {
 	
-	@RequestMapping("/main") // method ´Üµ¶ ¸ÅÇÎ
+	@RequestMapping("/main")
 	public String main() {
 		return "main/index";
 	}
@@ -19,7 +19,7 @@ public class MainController {
 	@RequestMapping("/hello")
 	public String hello() {
 		
-		return "¾È³çÇÏ¼¼¿ä";
+		return "ï¿½È³ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½";
 	}
 	
 	@ResponseBody

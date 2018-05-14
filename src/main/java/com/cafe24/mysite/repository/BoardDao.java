@@ -40,7 +40,7 @@ public class BoardDao {
 
 	
 	
-	public boolean update(long groupNo, long orderNo) { /* 댓글 그룹번호, 오더번호 수정  */
+	public boolean update(long groupNo, long orderNo) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("groupNo", groupNo);
 		map.put("orderNo", orderNo);
@@ -49,7 +49,7 @@ public class BoardDao {
 		return (result==1);
 	}//update(groupNo, orderNo)
 	
-	public boolean update(long no) { /* 조회수 증가 */
+	public boolean update(long no) {
 		int result = sqlSession.update("board.updateByNo", no);
 		return (result==1);
 	}//update(no)
