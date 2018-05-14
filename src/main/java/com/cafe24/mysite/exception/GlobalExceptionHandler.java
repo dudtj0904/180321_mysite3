@@ -1,4 +1,4 @@
-﻿package com.cafe24.mysite.exception;
+package com.cafe24.mysite.exception;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
 	public void handlerException(HttpServletRequest request,
 								HttpServletResponse response,
 								Exception e) throws Exception {
+		
 		// 1. logging
 		StringWriter error = new StringWriter(); // e.printStackTrace() -> string
 		e.printStackTrace(new PrintWriter(error));
