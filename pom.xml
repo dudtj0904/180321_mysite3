@@ -149,6 +149,18 @@
 					<warSourceDirectory>webapp</warSourceDirectory>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>tomcat-maven-plugin</artifactId>
+				<configuration>
+					<url>http://127.0.0.1/manager/text</url>
+					<path>/180321_mysite3</path>
+					<username>admin</username>
+					<password>manager</password>
+				</configuration>
+			</plugin>
+
+
 		</plugins>
 	</build>
 	<profiles>
@@ -171,19 +183,7 @@
 							<encoding>UTF-8</encoding>
 						</configuration>
 					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>tomcat-maven-plugin</artifactId>
-						<configuration>
-							<url>http://127.0.0.1/manager/text</url>
-							<path>/180321_mysite3</path>
-							<username>admin</username>
-							<password>manager</password>
-						</configuration>
-					</plugin>
 				</plugins>
-
-
 			</build>
 			<dependencies>
 				<!-- Servlet -->
