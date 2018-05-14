@@ -34,20 +34,16 @@ public class GlobalExceptionHandler {
 		LOG.info(  error.toString() );
 		LOG.warn(  "warn"+error.toString() );
 		LOG.error(  "error"+error.toString() );
-		
-		
-		// request는 브라우저에서 보내는 정보 / response는 서버가 브라우저에게 보내는 것 
-		// 브라우저에서 json형식으로 보냈으면 응답도 json으로 해주어야 함
+
 		String accept = request.getHeader("accept");
 		if(accept.matches(".*application/json.*")) {
-			// 2. 실패 JSON 응답
+			// 2. fail JSON response
 			JSONResult jsonResult = JSONResult.fail(error.toString());
 			String json = new ObjectMapper().writeValueAsString(jsonResult);
 			response.setContentType("application/json; charset=utf-8");
 			response.getWriter().print(json);
 			
 		} else {
-			// 2. 사과 page
 			request.getRequestDispatcher("/WEB-INF/views/error/exception.jsp").forward(request, response);
 		}
 		

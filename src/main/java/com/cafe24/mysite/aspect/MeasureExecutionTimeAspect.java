@@ -6,8 +6,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
-@Aspect		// proxy 만들 수 있도록
-@Component	// spring이 스캔할 수 있도록
+@Aspect		
+@Component	
 public class MeasureExecutionTimeAspect {
 	
 	@Around("execution(* *..repository.*.*(..))||execution(* *..service.*.*(..))")

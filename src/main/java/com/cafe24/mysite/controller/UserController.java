@@ -34,15 +34,8 @@ public class UserController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(@ModelAttribute @Valid User vo, BindingResult result) {
 		
-		/* validation 에러 처리 */
 		if(result.hasErrors()) {
-			/*
-			List<ObjectError> list = result.getAllErrors();
-			// 에러 내용 출력 
-			for(ObjectError error : list) {
-				System.out.println("Object Error: "+error);
-			}
-			*/
+
 			return "user/join";
 		}
 		
@@ -64,9 +57,7 @@ public class UserController {
 	
 	/*
 	@ExceptionHandler( UserDaoException.class )
-	public String handleUserDaoException() {
-		// 로그남기기 
-		
+	public String handleUserDaoException() {		
 		return "error/exception";
 	}*/
 
