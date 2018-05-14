@@ -23,6 +23,7 @@ public class GlobalExceptionHandler {
 	public void handlerException(HttpServletRequest request,
 								HttpServletResponse response,
 								Exception e) throws Exception {
+		request.setCharacterEncoding("utf-8");
 		// 1. logging
 		StringWriter error = new StringWriter(); // e.printStackTrace() -> string
 		e.printStackTrace(new PrintWriter(error));
