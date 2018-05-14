@@ -2,8 +2,8 @@ package com.cafe24.mysite.dto;
 
 public class JSONResult {
 	private String result;	// "success" or "fail"
-	private String message;	// result가 "fail"일 때의 원인 메세지
-	private Object data;	// result가 "success"일 때의 전달할 데이터 
+	private String message;	// result "fail"
+	private Object data;	// result "success"
 	
 	private JSONResult(String result, String message, Object data) {
 		this.result = result;

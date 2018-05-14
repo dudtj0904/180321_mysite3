@@ -47,7 +47,7 @@ public class BoardController {
 	
 	@RequestMapping(value="/write", method=RequestMethod.GET)
 	public String write( HttpSession session, Model model) {
-		User authUser = (User) session.getAttribute("authUser"); //접근제어
+		User authUser = (User) session.getAttribute("authUser"); 
 		if(authUser == null) return "redirect:/main";
 		
 		Board board = new Board();

@@ -16,25 +16,18 @@ public class Paging {
 	BoardService boardService;
 	
 	public PageInfo pagingCalculator(PageInfo pageinfo, int onePageBoardCount) {
-		// 한 페이지당 게시글 수 세팅
 		pageinfo.setPageBoardCount(onePageBoardCount);
 		
-		// 전체 게시글 수 세팅
 		pageinfo.setBoardCount(maxBoardCount(pageinfo.getKwd()));
 		
-		// 전체 페이지 수 세팅
 		pageinfo.setTotalPageCount(totalPageCountSetting(pageinfo));
 		
-		// 현재 페이지 세팅
 		pageinfo.setPage(currentPageNumberSetting(pageinfo));
 		
-		// 페이지의 끝 번호 세팅
 		pageinfo.setEndPageNumber(endPageNumberSetting(pageinfo));
 				
-		// 페이지의 시작 번호 세팅
 		pageinfo.setStartPageNumber(startPageNumberSetting(pageinfo));
 		
-		// 버튼 세팅
 		pageinfo = barSetting(pageinfo);
 		
 		return pageinfo;
@@ -43,7 +36,7 @@ public class Paging {
 	
 	public int totalPageCountSetting(PageInfo pageinfo) {
 		int totalCountDiv = pageinfo.getBoardCount()%pageinfo.getPageBoardCount();
-		int totalCount = 0; // 총 페이지 수
+		int totalCount = 0;
 		if(totalCountDiv == 0) {
 			totalCount = pageinfo.getBoardCount()/pageinfo.getPageBoardCount();
 		} else {
@@ -53,11 +46,9 @@ public class Paging {
 	}
 	
 	public PageInfo barSetting(PageInfo pageinfo) {
-		// 왼쪽버튼
 		if(pageinfo.getPage() <= 5) pageinfo.setPreviousBar(false);
 		else pageinfo.setPreviousBar(true);
 		
-		// 오른쪽버튼
 		if(pageinfo.getTotalPageCount() > pageinfo.getEndPageNumber()) {
 			pageinfo.setNextBar(true);
 		} else {
