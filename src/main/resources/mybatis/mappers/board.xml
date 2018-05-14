@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+
+	<select id="getListByKwd" parameterType="String" resultType="board">
+		<![CDATA[select no, title, group_no as groupNo, order_no as orderNo, depth, date_format(reg_date, '%Y-%m-%d %h:%i:%s') as regDate, hit, user_no as userNo, user_name as userName from board where title like #{kwd } or content like #{kwd }]]>
+	</select>
+	
+	<select id="getListByPageAndKwd" parameterType="map" resultType="board">
+		<![CDATA[select no, title, group_no as groupNo, order_no as orderNo, depth, date_format(reg_date, '%Y-%m-%d %h:%i:%s') as regDate, hit, user_no as userNo, user_name as userName from board where title like #{kwd } or content like #{kwd } order by group_no desc, order_no asc limit #{page },10]]>
+	</select>
+	
+	<select id="get" parameterType="long" resultType="board">
+		<![CDATA[select no, title, content, group_no as groupNo, order_no as orderNo, depth, user_no as userNo from board where no=#{no }]]>
+	</select> 
+	
+	<select id="getGroupNo" resultType="long">
+		<![CDATA[select ifnull(max(group_no), 0) from (select group_no from board group by group_no) tbl]]>
+	</select>
+	
+	<select id="getOrderNo" parameterType="long" resultType="long">
+		<![CDATA[select max(order_no) from (select * from board where group_no = #{groupNo }) tbl]]>
+	</select>
+	
+	<update id="updateByGroupNoAndOrderNo" parameterType="map">
+		<![CDATA[update board set order_no=order_no+1 where group_no=#{groupNo } and order_no >= #{orderNo }]]>
+	</update>
+	
+	<update id="updateByNo" parameterType="long">
+		<![CDATA[update board set hit=hit+1 where no=#{no }]]>
+	</update>
+	
+	<update id="updateByBoard" parameterType="Board">
+		<![CDATA[update board set title=#{title }, content=#{content } where no=#{no }]]>
+	</update>
+	
+	<insert id="insert" parameterType="board">
+		<![CDATA[insert into board values(null, #{title }, #{content }, #{groupNo}, #{orderNo}, #{depth}, sysdate(), default, #{userNo}, #{userName})]]>
+	</insert>
+	
+	<delete id="delete" parameterType="long">
+		<![CDATA[delete from board where no=#{no }]]>
+	</delete>
+</mapper>

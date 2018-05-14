@@ -1,0 +1,99 @@
+package com.cafe24.mysite.paging;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.cafe24.mysite.service.BoardService;
+import com.cafe24.mysite.vo.Board;
+import com.cafe24.mysite.vo.PageInfo;
+
+@Component
+public class Paging {
+	
+	@Autowired
+	BoardService boardService;
+	
+	public PageInfo pagingCalculator(PageInfo pageinfo, int onePageBoardCount) {
+		// 한 페이지당 게시글 수 세팅
+		pageinfo.setPageBoardCount(onePageBoardCount);
+		
+		// 전체 게시글 수 세팅
+		pageinfo.setBoardCount(maxBoardCount(pageinfo.getKwd()));
+		
+		// 전체 페이지 수 세팅
+		pageinfo.setTotalPageCount(totalPageCountSetting(pageinfo));
+		
+		// 현재 페이지 세팅
+		pageinfo.setPage(currentPageNumberSetting(pageinfo));
+		
+		// 페이지의 끝 번호 세팅
+		pageinfo.setEndPageNumber(endPageNumberSetting(pageinfo));
+				
+		// 페이지의 시작 번호 세팅
+		pageinfo.setStartPageNumber(startPageNumberSetting(pageinfo));
+		
+		// 버튼 세팅
+		pageinfo = barSetting(pageinfo);
+		
+		return pageinfo;
+		
+	}//end
+	
+	public int totalPageCountSetting(PageInfo pageinfo) {
+		int totalCountDiv = pageinfo.getBoardCount()%pageinfo.getPageBoardCount();
+		int totalCount = 0; // 총 페이지 수
+		if(totalCountDiv == 0) {
+			totalCount = pageinfo.getBoardCount()/pageinfo.getPageBoardCount();
+		} else {
+			totalCount = pageinfo.getBoardCount()/pageinfo.getPageBoardCount()+1;
+		}
+		return totalCount;
+	}
+	
+	public PageInfo barSetting(PageInfo pageinfo) {
+		// 왼쪽버튼
+		if(pageinfo.getPage() <= 5) pageinfo.setPreviousBar(false);
+		else pageinfo.setPreviousBar(true);
+		
+		// 오른쪽버튼
+		if(pageinfo.getTotalPageCount() > pageinfo.getEndPageNumber()) {
+			pageinfo.setNextBar(true);
+		} else {
+			pageinfo.setNextBar(false);
+		}
+		
+		return pageinfo;
+	}
+	
+	public int startPageNumberSetting(PageInfo pageinfo) {
+		return pageinfo.getEndPageNumber() - 4;
+	}//end
+	
+	public int endPageNumberSetting(PageInfo pageinfo) {
+		int page = pageinfo.getPage();
+		int endPageNumber = 0;
+		
+		if(page % 5 == 0) {
+			endPageNumber = page;
+		} else {
+			endPageNumber = ((page / 5) + 1) * 5;
+		}
+		
+		return endPageNumber;
+	}
+	
+	public int maxBoardCount(String kwd) {
+		List<Board> list = boardService.getBoardList(kwd);
+		return list.size();
+	}//end
+	
+	public int currentPageNumberSetting(PageInfo pageinfo) {
+		if(pageinfo.getPage() == 0) {
+			return 1;
+		}
+
+		return pageinfo.getPage();
+	}//end
+}

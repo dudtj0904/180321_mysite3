@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="comment">
+	<select id="getOrderNo" resultType="long">
+		<![CDATA[select ifnull(max(order_no), 0) from comment]]>
+	</select>
+	
+	<select id="getList" parameterType="long" resultType="comment">
+		<![CDATA[select content, order_no as orderNo, date_format(reg_date, '%Y-%m-%d %h:%i:%s') as regDate, user_no as userNo, user_name as userName, no from comment where board_no=#{no} order by order_no]]>
+	</select>
+	
+	<select id="get" parameterType="long" resultType="comment">
+		<![CDATA[select board_no as boardNo from comment where no=#{no}]]>
+	</select>
+	
+	<delete id="deleteGroup" parameterType="long">
+		<![CDATA[delete from comment where board_no=#{no }]]>
+	</delete>
+	
+	<delete id="delete" parameterType="long">
+		<![CDATA[delete from comment where no=#{no}]]>
+	</delete>
+	
+	<insert id="insert" parameterType="comment">
+		<![CDATA[insert into comment values(null, #{content}, #{orderNo}, sysdate(), #{boardNo}, #{userNo}, #{userName})]]>
+	</insert>
+	
+</mapper>
